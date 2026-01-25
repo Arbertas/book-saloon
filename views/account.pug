@@ -1,0 +1,38 @@
+extends base
+block append head
+  script(src='/js/updateDetails.js' type='module' defer)
+block content
+  div.account-container
+    section.block
+      h2 Account details
+      //- Without API
+      //- form.form.form-details(action='/update-user-details' method='POST' enctype='multipart/form-data')
+      //- With API
+      form.form.form-details
+        div.img-div
+          img.details-photo(src=`/img/users/${user.photo}`)
+        div
+          label(for='username') Username: 
+          input(type='text' id='username' name='username' value=`${user.username}` required)
+        div
+          label(for='email') Email: 
+          input(type='email' id='email' name='email' value=`${user.email}` required)
+        div
+          label(for='avatar') Change avatar: 
+          input(type='file' id='avatar' name='photo' accept='image/*')
+        div
+          button.btn-default.btn-save Save
+    section.block
+      h2 Password change
+      form.form.form-password
+        div
+          label(for='password-current') Current password: 
+          input(type='password' id='password-current' placeholder='••••••••' required)
+        div
+          label(for='password-new') New password: 
+          input(type='password' id='password-new' placeholder='••••••••' required)
+        div
+          label(for='password-repeat') Repeat password: 
+          input(type='password' id='password-repeat' placeholder='••••••••' required)
+        div
+          button.btn-default.btn-save.btn-save-password Save

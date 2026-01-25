@@ -1,0 +1,29 @@
+extends base
+block append head
+  script(src='/js/deleteBook.js' type='module' defer)
+block content
+  div.book-info.block
+    div.book-cover
+      img(src=`/img/covers/${book.cover}`, alt=`${book.title} cover`)
+    div.book-details
+      h3(data-book-title=`${book.title}`)= book.title
+      p= book.author
+      p= book.year
+      p #{book.publisher} (#{book.published})
+      - if (user?.role === 'admin' || user?.role === 'librarian')
+        a.btn-default(href=`/edit-book/${book.slug}`) Update book
+        button.btn-default.btn-delete(data-id=`${book._id}`) Delete book
+  div.reviews-container
+    - if (book.reviews.length > 0)
+        each review in book.reviews
+          div.review.block
+            div.stars
+              each star in [1,2,3,4,5]
+                span &star#{star <= review.rating ? 'f' : ''};
+              | 
+              span (#{review.rating})
+            p "#{review.review}"
+            p= review.user.username
+    - else
+      div.review.block
+        p No reviews yet.

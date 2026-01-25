@@ -1,0 +1,21 @@
+extends base
+block append head
+  script(src='/js/signUp.js' type='module' defer)
+block content
+  div.sign-up-container.block
+    h2 Sign up
+    form.form.form-sign-up
+      div
+        label(for='username') Username: 
+        input(type='text' id='username' required)
+      div
+        label(for='email') Email: 
+        input(type='email' id='email' required)
+      div
+        label(for='password') Password: 
+        input(type='password' id='password' required)
+      div
+        label(for='passwordConfirm') Confirm password: 
+        input(type='password' id='passwordConfirm' required)
+      div
+        button.btn-default Sign up

@@ -1,0 +1,19 @@
+doctype html
+html
+  head
+    block head
+      meta(charset='UTF-8')
+      meta(name='viewport' content='width=device-width, initial-scale=1.0')
+      script(src='https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js' defer)
+      script(src='/js/logout.js' type='module' defer)
+      link(rel='stylesheet' href='/css/style.css')
+      link(rel='shortcut icon' href='/img/favicon.ico' type='image/x-icon')
+      title Book Saloon | #{title || 'The Best Saloon'}
+  body
+    // Header
+    include _header
+    // Main
+    main.main
+      block content
+    // Footer
+    include _footer

@@ -1,0 +1,11 @@
+extends base
+block content
+  div.books-container
+    each book in books
+      div.book.block
+        img(src=`img/covers/${book.cover}`, alt=`${book.title} cover`)
+        h3= book.title
+        p= book.author
+        p= book.year
+        p #{book.publisher} (#{book.published})
+        a.btn-default(href=`/book/${book.slug}`) Open book

@@ -1,0 +1,47 @@
+extends base
+block append head
+  script(src='/js/editBook.js' type='module' defer)
+block content
+  div.edit-book-container.block
+    h2 Update book
+    form.form.form-edit-book(data-id=`${book._id}`)
+      div
+        label(for='firstName') First name: 
+        input(type='text' id='firstName' name='firstName' value=`${book.firstName}`)
+      div
+        label(for='lastName') Last name: 
+        input(type='text' id='lastName' name='lastName' value=`${book.lastName}` required)
+      div
+        label(for='title') Title: 
+        input(type='text' id='title' name='title' value=`${book.title}` required)
+      div
+        label(for='year') Year: 
+        input(type='number' id='year' name='year' value=`${book.year}` required)
+      div
+        label(for='publisher') Publisher: 
+        input(type='text' id='publisher' name='publisher' value=`${book.publisher}` required)
+      div
+        label(for='published') Published: 
+        input(type='number' id='published' name='published' value=`${book.published}` required)
+      div
+        label(for='pages') Pages: 
+        input(type='number' id='pages' name='pages' value=`${book.pages}` required)
+      div
+        label(for='language') Language: 
+        select(id='language' name='language' data-language=`${book.language}` required)
+          option(value='Lithuanian') Lithuanian
+          option(value='English') English
+          option(value='Other') Other
+      div
+        label(for='format') Format: 
+        select(id='format' name='format' data-format=`${book.format}` required)
+          option(value='Hardcover') Hardcover
+          option(value='Paperback') Paperback
+      div
+        label(for='isbn') ISBN: 
+        input(type='text' id='isbn' value=`${book.isbn || ''}` name='isbn')
+      div
+        label(for='cover') Cover: 
+        input(type='file' id='cover' name='cover' accept='image/*' data-cover=`${book.cover}`)
+      div
+        button.btn-default.btn-save Save

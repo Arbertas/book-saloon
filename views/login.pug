@@ -1,0 +1,15 @@
+extends base
+block append head
+  script(src='/js/login.js' type='module' defer)
+block content
+  div.login-container.block
+    h2 Log in
+    form.form.form-login
+      div
+        label(for='email') Email: 
+        input(type='email' id='email' required)
+      div
+        label(for='password') Password: 
+        input(type='password' id='password' required)
+      div
+        button.btn-default Login

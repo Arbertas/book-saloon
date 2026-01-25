@@ -1,0 +1,20 @@
+header.header
+  a(href='/')
+    h1
+      span.horse &#9816;
+      span Book Saloon
+  nav.nav.block
+    ul
+      - if (user?.role === 'admin' || user?.role === 'librarian')
+        li: a(href='/') All books
+        li.gap-r: a(href='/add-book') Add book
+      - else
+        li.gap-r: a(href='/') All books
+      if user
+        li: a(href='/account')
+          img.avatar(src=`/img/users/${user.photo}`)
+          span #{user.username}
+        li: a.btn-logout(href='#') Log out
+      else
+        li: a(href='/sign-up') Sign up
+        li: a(href='/login') Log in
