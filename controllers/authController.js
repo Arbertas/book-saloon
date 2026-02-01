@@ -4,7 +4,9 @@ import { promisify } from 'util';
 import nodemailer from 'nodemailer';
 import User from '../models/userModel.js';
 import AppError from '../utils/appError.js';
+import Email from '../utils/email.js';
 
+// Email class replaced sendEmail fn
 const sendEmail = async options => {
   // 1. Create a transporter
   const transporter = nodemailer.createTransport({
@@ -53,6 +55,9 @@ const signup = async (req, res) => {
   if (process.env.NODE_ENV === 'production') options.secure = true;
   res.cookie('jwt', token, options);
   newUser.password = undefined;
+  const url = `${req.protocol}://${req.get('host')}/account`;
+  // console.log(url);
+  await new Email(newUser, url).sendWelcome();
   res.status(201).json({ status: 'success', token, data: { user: newUser } });
 };
 
@@ -140,11 +145,13 @@ const forgottenPassword = async (req, res, next) => {
   const resetToken = user.createResetPasswordToken();
   await user.save({ validateModifiedOnly: true });
   // 3. Send it to user's email
-  const resetURL = `${req.protocol}://${req.get('host')}/api/v1/users/resetPassword/${resetToken}`;
-  let text = `Forgot password? Change your password using the following URL:\n${resetURL}`;
-  text += "\nIf you didn't forget your password, ignore this email.";
+  // const resetURL = `${req.protocol}://${req.get('host')}/api/v1/users/resetPassword/${resetToken}`;
+  // let text = `Forgot password? Change your password using the following URL:\n${resetURL}`;
+  // text += "\nIf you didn't forget your password, ignore this email.";
   try {
-    await sendEmail({ email: user.email, subject: 'Password reset token (valid for 10 minutes)', text });
+    // await sendEmail({ email: user.email, subject: 'Password reset token (valid for 10 minutes)', text });
+    const resetURL = `${req.protocol}://${req.get('host')}/api/v1/users/resetPassword/${resetToken}`;
+    await new Email(user, resetURL).sendPasswordReset();
     res.status(200).json({ status: 'success', message });
   } catch (err) {
     user.passwordResetToken = undefined;

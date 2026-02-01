@@ -11,7 +11,7 @@ formatEl.value = formatData;
 
 const updateBook = async (id, data) => {
   try {
-    const res = await axios.patch('http://127.0.0.1:3000/api/v1/books/' + id, data);
+    const res = await axios.patch('/api/v1/books/' + id, data);
     if (res.data.status === 'success') {
       showAlert('success', 'Book was updated successfully.');
     }

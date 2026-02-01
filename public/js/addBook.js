@@ -7,7 +7,7 @@ firstField.focus();
 
 const addNewBook = async data => {
   try {
-    const res = await axios.post('http://127.0.0.1:3000/api/v1/books', data);
+    const res = await axios.post('/api/v1/books', data);
     if (res.data.status === 'success') {
       showAlert('success', 'New book was added successfully.');
       formEl.reset();

@@ -7,7 +7,7 @@ const userImgInputEl = document.querySelector('#avatar');
 
 const updateDetails = async data => {
   try {
-    const res = await axios.patch('http://127.0.0.1:3000/api/v1/users/updateMe', data);
+    const res = await axios.patch('/api/v1/users/updateMe', data);
     if (res.data.status === 'success') {
       showAlert('success', 'Details updated successfully.');
       window.setTimeout(() => location.reload(), 1500);
@@ -20,7 +20,7 @@ const updateDetails = async data => {
 const updatePassword = async (passwordCurrent, password, passwordConfirm) => {
   try {
     const data = { passwordCurrent, password, passwordConfirm };
-    const res = await axios.patch('http://127.0.0.1:3000/api/v1/users/updateMyPassword', data);
+    const res = await axios.patch('/api/v1/users/updateMyPassword', data);
     if (res.data.status === 'success') showAlert('success', 'Password updated successfully.');
   } catch (err) {
     showAlert('error', err.response.data.message);
