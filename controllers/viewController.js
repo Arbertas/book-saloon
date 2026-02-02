@@ -37,7 +37,7 @@ const getLogin = (req, res) => {
 };
 
 const getSignUp = (req, res) => {
-  res.status(200).render('signUp', { title: 'Sign up' });
+  res.status(200).render('signup', { title: 'Sign up' });
 };
 
 const getAccount = (req, res) => {
